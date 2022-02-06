@@ -1,0 +1,287 @@
+openapi: 3.0.1
+info:
+  title: Vengeance_Backend
+  version: v1
+servers:
+- url: /
+security:
+- Bearer: []
+paths:
+  /Device/availableDevices:
+    get:
+      tags:
+      - Device
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeviceResource'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeviceResource'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeviceResource'
+  /Device/userDevices:
+    get:
+      tags:
+      - Device
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDeviceResource'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDeviceResource'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDeviceResource'
+  /Device:
+    post:
+      tags:
+      - Device
+      parameters:
+      - name: device
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          nullable: true
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UserDeviceResource'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDeviceResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UserDeviceResource'
+  /Health/overview:
+    get:
+      tags:
+      - Health
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/HealthResource'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/HealthResource'
+  /Health/details:
+    get:
+      tags:
+      - Health
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/HealthResource'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/HealthResource'
+  /Health/addHealthData:
+    post:
+      tags:
+      - Health
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HealthDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/HealthDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/HealthDto'
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/HealthResource'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/HealthResource'
+  /User:
+    get:
+      tags:
+      - User
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UserResource'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UserResource'
+  /User/createUser:
+    post:
+      tags:
+      - User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UserResource'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UserResource'
+  /User/updateUser:
+    put:
+      tags:
+      - User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UserResource'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UserResource'
+  /User/deleteUser:
+    delete:
+      tags:
+      - User
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UserResource'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UserResource'
+components:
+  schemas:
+    DeviceResource:
+      type: object
+      additionalProperties: false
+    UserDeviceResource:
+      type: object
+      additionalProperties: false
+    HealthResource:
+      type: object
+      additionalProperties: false
+    HealthDto:
+      type: object
+      additionalProperties: false
+    UserResource:
+      type: object
+      properties:
+        lastName:
+          type: string
+          nullable: true
+        firstName:
+          type: string
+          nullable: true
+        profilePictureURL:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UserDTO:
+      type: object
+      properties:
+        firstName:
+          type: string
+          nullable: true
+        lastName:
+          type: string
+          nullable: true
+        profilePictureURL:
+          type: string
+          nullable: true
+        weight:
+          type: number
+          format: double
+        height:
+          type: number
+          format: double
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \\r\\n\\r\\\
+        n \n                      Enter 'Bearer' [space] and then your token in the\
+        \ text input below.\n                      \\r\\n\\r\\nExample: 'Bearer 12345abcdef'"
+      name: Authorization
+      in: header
